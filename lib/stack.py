@@ -1,4 +1,5 @@
 class Stack:
+
     def __init__(self, items=None, limit=100):
         if items is None:
             items = []
@@ -9,10 +10,11 @@ class Stack:
         return len(self.items) == 0
 
     def push(self, item):
-        if len(self.items) >= self.limit:
-            # Silently ignore when full (matches test expectations)
-            return
+    if len(self.items) < self.limit:
         self.items.append(item)
+    else:
+        raise Exception("Stack is full")
+       
 
     def pop(self):
         if not self.isEmpty():
@@ -32,7 +34,6 @@ class Stack:
 
     def search(self, target):
         try:
-            # Returns distance from top (0 = top element)
-            return (len(self.items) - 1) - self.items.index(target)
+            return len(self.items) - 1 - self.items[::-1].index(target)
         except ValueError:
             return -1
